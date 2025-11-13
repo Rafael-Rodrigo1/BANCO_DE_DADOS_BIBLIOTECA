@@ -89,24 +89,24 @@ INSERT INTO Emprestimo (data_emprestimo, data_devolucao, id_usuario, isbn) VALUE
 
 -- QUERIES
 
--- 2- Listar os empréstimos com nome do usuário e título do livro
+-- 1- Listando os empréstimos com nome do usuário e título do livro!
 SELECT e.id_emprestimo, u.nome AS usuario, l.titulo AS livro, e.data_emprestimo, e.data_devolucao
 FROM Emprestimo e
 JOIN Usuario u ON e.id_usuario = u.id_usuario
 JOIN Livro l ON e.isbn = l.isbn;
 
---  2 - Mostrar todos os livros emprestados que ainda não foram devolvidos
+--  2 - Mostrandro todos os livros emprestados que ainda não foram devolvidos!
 SELECT u.nome AS usuario, l.titulo AS livro, e.data_emprestimo FROM Emprestimo e
 JOIN Usuario u ON e.id_usuario = u.id_usuario
 JOIN Livro l ON e.isbn = l.isbn
 WHERE e.data_devolucao IS NULL;
 
--- 3- Mostrar os livros mais emprestados (ranking)
+-- 3- Mostrando os livros mais emprestados! (ranking)
 SELECT l.titulo, COUNT(e.id_emprestimo) AS vezes_emprestado FROM Livro l
 JOIN Emprestimo e ON l.isbn = e.isbn
 GROUP BY l.titulo ORDER BY vezes_emprestado DESC;
 
--- 4 - Mostrar os usuários que ainda não devolveram nenhum livro
+-- 4 - Mostrando os usuários que ainda não devolveram nenhum livro!
 SELECT nome, email
 FROM Usuario
 WHERE id_usuario IN (
